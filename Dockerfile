@@ -13,13 +13,24 @@ RUN apt-get -y update &&  \
 RUN rm -rf /home/$NB_USER/examples && \
     rm -f /home/$NB_USER/Dockerfile
 COPY Dockerfile /home/$NB_USER/Dockerfile
+COPY environment.yml /home/$NB_USER/environment.yml
 COPY examples /home/$NB_USER/examples
-RUN chown ${NB_UID} /home/$NB_USER/Dockerfile && \
+RUN chown ${NB_UID} /home/$NB_USER/environment.yml && \
+    chown ${NB_UID} /home/$NB_USER/Dockerfile && \
     chown -R ${NB_UID} /home/$NB_USER/examples
 USER $NB_USER
 WORKDIR /home/$NB_USER
-RUN conda install -n notebook-env -c anaconda gxx_linux-64 -y && \
-    /home/vmuser/miniconda3/envs/notebook-env/bin/Rscript -e \
-      'install.packages("Seurat", repos="https://cloud.r-project.org/", dependencies=TRUE, type="source")'
+ENV PATH=$PATH:/home/$NB_USER/miniconda3/bin/
+RUN . /home/$NB_USER/miniconda3/etc/profile.d/conda.sh && \
+    conda config --set safety_checks disabled && \
+    conda update -n base -c defaults conda && \
+    conda env update -q -n notebook-env --file /home/$NB_USER/environment.yml && \
+    conda clean -a -y && \
+    rm -rf /home/$NB_USER/.cache && \
+    rm -rf /tmp/* && \
+    rm -rf ${TMPDIR} && \
+    mkdir -p ${TMPDIR} && \
+    mkdir -p /home/$NB_USER/.cache && \
+    find miniconda3/ -type f -name *.pyc -exec rm -f {} \; 
 EXPOSE 8888
 CMD [ "notebook" ]
