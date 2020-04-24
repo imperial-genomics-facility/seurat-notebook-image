@@ -18,6 +18,7 @@ RUN chown ${NB_UID} /home/$NB_USER/Dockerfile && \
     chown -R ${NB_UID} /home/$NB_USER/examples
 USER $NB_USER
 WORKDIR /home/$NB_USER
+ENV PATH $PATH:/home/$NB_USER/miniconda3/bin/
 RUN conda update -n base -c defaults conda && \
     conda activate notebook-env && \
     echo 'install.packages(\
