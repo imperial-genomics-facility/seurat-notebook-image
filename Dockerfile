@@ -24,7 +24,7 @@ RUN . /home/$NB_USER/miniconda3/etc/profile.d/conda.sh && \
     conda activate notebook-env && \
     echo 'install.packages(c("Seurat"), \
                            repos="https://cloud.r-project.org/", \
-                           dependencies = TRUE,
+                           dependencies = TRUE, \
                            type = "source")' > /tmp/install.R && \
     R CMD BATCH --no-save /tmp/install.R && \
     rm -rf /tmp/install.R
