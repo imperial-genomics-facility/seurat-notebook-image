@@ -20,7 +20,7 @@ USER $NB_USER
 WORKDIR /home/$NB_USER
 ENV PATH $PATH:/home/$NB_USER/miniconda3/bin/
 RUN conda update -n base -c defaults conda && \
-    conda activate notebook-env && \
+    source activate notebook-env && \
     echo 'install.packages(\
            c("Seurat"), \
            repos="https://cloud.r-project.org/", \
