@@ -18,14 +18,8 @@ RUN chown ${NB_UID} /home/$NB_USER/Dockerfile && \
     chown -R ${NB_UID} /home/$NB_USER/examples
 USER $NB_USER
 WORKDIR /home/$NB_USER
-ENV PATH $PATH:/home/$NB_USER/miniconda3/envs/notebook-env/bin/
-RUN echo 'install.packages(\
-           c("Seurat"), \
-           repos="https://cloud.r-project.org/", \
-           dependencies = TRUE, \
-           lib.loc="/home/vmuser/miniconda3/envs/notebook-env/lib/R/library", \
-           type = "source")' > /tmp/install.R && \
-    R CMD BATCH --no-save /tmp/install.R && \
+RUN echo 'install.packages(c("Seurat"), repos="https://cloud.r-project.org/", dependencies = TRUE, lib.loc="/home/vmuser/miniconda3/envs/notebook-env/lib/R/library", type = "source")' > /tmp/install.R && \
+    /home/$NB_USER/miniconda3/envs/notebook-env/bin/R CMD BATCH --no-save /tmp/install.R && \
     rm -rf /tmp/install.R
 EXPOSE 8888
 CMD [ "notebook" ]
