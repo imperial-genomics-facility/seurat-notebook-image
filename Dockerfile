@@ -18,13 +18,12 @@ RUN chown ${NB_UID} /home/$NB_USER/Dockerfile && \
     chown -R ${NB_UID} /home/$NB_USER/examples
 USER $NB_USER
 WORKDIR /home/$NB_USER
-ENV PATH $PATH:/home/$NB_USER/miniconda3/bin/
-RUN conda update -n base -c defaults conda && \
-    source activate notebook-env && \
-    echo 'install.packages(\
+ENV PATH $PATH:/home/$NB_USER/miniconda3/envs/notebook-env/bin/
+RUN echo 'install.packages(\
            c("Seurat"), \
            repos="https://cloud.r-project.org/", \
            dependencies = TRUE, \
+           lib.loc="/home/vmuser/miniconda3/envs/notebook-env/lib/R/library", \
            type = "source")' > /tmp/install.R && \
     R CMD BATCH --no-save /tmp/install.R && \
     rm -rf /tmp/install.R
