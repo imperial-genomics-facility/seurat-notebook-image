@@ -18,7 +18,7 @@ RUN chown ${NB_UID} /home/$NB_USER/Dockerfile && \
     chown -R ${NB_UID} /home/$NB_USER/examples
 USER $NB_USER
 WORKDIR /home/$NB_USER
-RUN /home/vmuser/miniconda3/envs/notebook-env/bin/Rscript -e 'install.packages("Seurat", repos="https://cloud.r-project.org/", lib="/home/vmuser/miniconda3/envs/notebook-env/lib/R/library")' > /tmp/install.R && \
-    rm -rf /tmp/install.R
+RUN /home/vmuser/miniconda3/envs/notebook-env/bin/Rscript -e \
+  'install.packages("Seurat", repos="https://cloud.r-project.org/", dependencies=TRUE, type="source")'
 EXPOSE 8888
 CMD [ "notebook" ]
