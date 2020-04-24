@@ -21,7 +21,9 @@ WORKDIR /home/$NB_USER
 RUN . /home/$NB_USER/miniconda3/etc/profile.d/conda.sh && \
     conda config --set safety_checks disabled && \
     conda update -n base -c defaults conda
-RUN echo 'install.packages(\
+RUN conda deactivate && \
+    conda activate notebook-env && \
+    echo 'install.packages(\
            c("Seurat"), \
            repos="https://cloud.r-project.org/", \
            dependencies = TRUE, \
