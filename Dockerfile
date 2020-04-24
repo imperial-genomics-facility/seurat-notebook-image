@@ -18,11 +18,9 @@ RUN chown ${NB_UID} /home/$NB_USER/Dockerfile && \
     chown -R ${NB_UID} /home/$NB_USER/examples
 USER $NB_USER
 WORKDIR /home/$NB_USER
-RUN . /home/$NB_USER/miniconda3/etc/profile.d/conda.sh && \
-    conda config --set safety_checks disabled && \
-    conda update -n base -c defaults conda
-RUN source deactivate && \
-    source activate notebook-env && \
+RUN . /home/vmuser/miniconda3/etc/profile.d/conda.sh && \
+    conda update -n base -c defaults conda && \
+    conda activate notebook-env && \
     echo 'install.packages(\
            c("Seurat"), \
            repos="https://cloud.r-project.org/", \
