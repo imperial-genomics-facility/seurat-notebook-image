@@ -10,4 +10,4 @@ Seurat data analysis notebooks
 ----------------------------------
 |docs| |binderMain|
 
-A repository for keeping conda env and docker image file for running single cell analysis using [Seurat](https://satijalab.org/seurat/)
+A repository for keeping conda env and docker image file for running single cell analysis using `Seurat <https://satijalab.org/seurat/>'_
