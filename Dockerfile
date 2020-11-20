@@ -25,7 +25,7 @@ RUN chown ${NB_UID} /home/$NB_USER/environment.yml && \
 USER $NB_USER
 WORKDIR /home/$NB_USER
 ENV PATH=$PATH:/home/$NB_USER/miniconda3/bin/
-RUN source activate notebook-env
+RUN conda activate notebook-env
 RUN conda update -n base -c defaults conda && \
     conda env update -q -n notebook-env --file /home/$NB_USER/environment.yml && \
     jupyter serverextension enable --sys-prefix jupyter_server_proxy && \
