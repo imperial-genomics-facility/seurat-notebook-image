@@ -1,6 +1,6 @@
-FROM imperialgenomicsfacility/scanpy-notebook-image:release-v0.0.1
+FROM imperialgenomicsfacility/scanpy-notebook-image:release-v0.0.4
 LABEL maintainer="imperialgenomicsfacility"
-LABEL version="0.0.1"
+LABEL version="0.0.2"
 LABEL description="Docker image for running Seurat based single cell analysis"
 ENV NB_USER vmuser
 ENV NB_UID 1000
@@ -25,6 +25,7 @@ RUN . /home/$NB_USER/miniconda3/etc/profile.d/conda.sh && \
     conda config --set safety_checks disabled && \
     conda update -n base -c defaults conda && \
     conda env update -q -n notebook-env --file /home/$NB_USER/environment.yml && \
+    jupyter serverextension enable --sys-prefix jupyter_server_proxy && \
     conda clean -a -y && \
     rm -rf /home/$NB_USER/.cache && \
     rm -rf /tmp/* && \
