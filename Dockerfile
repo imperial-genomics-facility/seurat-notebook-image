@@ -1,4 +1,4 @@
-FROM imperialgenomicsfacility/scanpy-notebook-image:release-v0.0.4
+FROM imperialgenomicsfacility/base-notebook-image:release-v0.0.4
 LABEL maintainer="imperialgenomicsfacility"
 LABEL version="0.0.2"
 LABEL description="Docker image for running Seurat based single cell analysis"
