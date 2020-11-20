@@ -10,11 +10,15 @@ RUN apt-get -y update &&  \
     apt-get purge -y --auto-remove && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+USER $NB_USER
+WORKDIR /home/$NB_USER
 RUN rm -rf /home/$NB_USER/examples && \
+    rm -f /home/$NB_USER/environment.yml && \
     rm -f /home/$NB_USER/Dockerfile
 COPY Dockerfile /home/$NB_USER/Dockerfile
 COPY environment.yml /home/$NB_USER/environment.yml
 COPY examples /home/$NB_USER/examples
+USER root
 RUN chown ${NB_UID} /home/$NB_USER/environment.yml && \
     chown ${NB_UID} /home/$NB_USER/Dockerfile && \
     chown -R ${NB_UID} /home/$NB_USER/examples
@@ -22,7 +26,6 @@ USER $NB_USER
 WORKDIR /home/$NB_USER
 ENV PATH=$PATH:/home/$NB_USER/miniconda3/bin/
 RUN . /home/$NB_USER/miniconda3/etc/profile.d/conda.sh && \
-    conda config --set safety_checks disabled && \
     conda update -n base -c defaults conda && \
     conda activate notebook-env && \
     conda env update -q -n notebook-env --file /home/$NB_USER/environment.yml && \
