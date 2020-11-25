@@ -25,8 +25,7 @@ RUN chown ${NB_UID} /home/$NB_USER/environment.yml && \
 USER $NB_USER
 WORKDIR /home/$NB_USER
 ENV PATH=$PATH:/home/$NB_USER/miniconda3/bin/
-RUN . /home/$NB_USER/miniconda3/etc/profile.d/conda.sh && \
-    conda config --set safety_checks disabled && \
+RUN conda config --set safety_checks disabled && \
     conda activate notebook-env && \
     conda env update -q -n notebook-env --file /home/$NB_USER/environment.yml && \
     conda clean -a -y && \
