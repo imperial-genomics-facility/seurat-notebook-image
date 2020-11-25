@@ -26,10 +26,9 @@ USER $NB_USER
 WORKDIR /home/$NB_USER
 ENV PATH=$PATH:/home/$NB_USER/miniconda3/bin/
 RUN . /home/$NB_USER/miniconda3/etc/profile.d/conda.sh && \
-    conda activate notebook-env && \
     conda update -n base -c defaults conda && \
+    conda activate notebook-env && \
     conda env update -q -n notebook-env --file /home/$NB_USER/environment.yml && \
-    jupyter serverextension enable --sys-prefix jupyter_server_proxy && \
     conda clean -a -y && \
     rm -rf /home/$NB_USER/.cache && \
     rm -rf /tmp/* && \
