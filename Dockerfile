@@ -7,6 +7,8 @@ ENV NB_UID 1000
 USER root
 WORKDIR /
 RUN apt-get -y update &&  \
+    curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash - && \
+    apt-get install --no-install-recommends -y nodejs && \
     apt-get purge -y --auto-remove && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
