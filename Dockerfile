@@ -27,11 +27,9 @@ WORKDIR /home/$NB_USER
 ENV PATH=$PATH:/home/$NB_USER/miniconda3/bin/
 RUN . /home/$NB_USER/miniconda3/etc/profile.d/conda.sh && \
     conda config --set safety_checks disabled && \
-    conda deactivate && \
     conda env update -q -n notebook-env --file /home/$NB_USER/environment.yml && \
-    conda activate notebook-env && \
     conda clean -a -y && \
-    jupyter labextension install @techrah/text-shortcuts && \
+    /home/vmuser/miniconda3/envs/notebook-env/bin/jupyter labextension install @techrah/text-shortcuts && \
     rm -rf /home/$NB_USER/.cache && \
     rm -rf /tmp/* && \
     rm -rf ${TMPDIR} && \
