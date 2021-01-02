@@ -26,6 +26,7 @@ USER $NB_USER
 WORKDIR /home/$NB_USER
 ENV PATH=$PATH:/home/$NB_USER/miniconda3/bin/
 RUN conda config --set safety_checks disabled && \
+    conda activate notebook-env && \
     conda env update -q -n notebook-env --file /home/$NB_USER/environment.yml && \
     conda clean -a -y && \
     jupyter labextension install @techrah/text-shortcuts && \
