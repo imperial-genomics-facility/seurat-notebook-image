@@ -3,6 +3,7 @@ channels:
  - bioconda
 dependencies:
  - conda-forge::r-seurat=4.0.0
+ - conda-forge::r-rlang=0.4.9
  - conda-forge::r-cairo
  - bioconda::bioconductor-limma
  - conda-forge::font-ttf-ubuntu
