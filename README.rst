@@ -10,8 +10,12 @@
     :target: https://nbviewer.jupyter.org/github/imperial-genomics-facility/seurat-notebook-image/tree/master/
     :alt: NBviewer
  
+.. |docker_pull| image:: https://img.shields.io/docker/pulls/imperialgenomicsfacility/seurat-notebook-image.svg
+    :target: https://hub.docker.com/r/imperialgenomicsfacility/seurat-notebook-image
+    :alt: Docker
+
 Seurat data analysis notebooks
-----------------------------------
-|docs| |binderMain| |nbviewer|
+--------------------------------------------
+|docs| |binderMain| |nbviewer| |docker_pull|
 
 A repository for keeping conda env and docker image file for running single cell analysis using `Seurat <https://satijalab.org/seurat/>`_
