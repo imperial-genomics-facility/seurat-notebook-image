@@ -4,6 +4,7 @@ channels:
 dependencies:
  - conda-forge::r-seurat=4.0.0
  - conda-forge::r-rlang=0.4.9
+ - bioconda::r-signac
  - conda-forge::r-cairo
  - conda-forge::r-devtools
  - bioconda::bioconductor-limma
